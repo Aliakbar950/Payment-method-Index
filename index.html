@@ -342,6 +342,51 @@
             transform: translateY(0);
         }
 
+        /* NEW: Back to App Button */
+        .back-to-app-btn {
+            background: linear-gradient(135deg, #33ccff 0%, #00ff99 100%);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(51, 204, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-to-app-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .back-to-app-btn:hover::before {
+            left: 100%;
+        }
+
+        .back-to-app-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(51, 204, 255, 0.6);
+            background: linear-gradient(135deg, #00ccff 0%, #00cc66 100%);
+        }
+
+        .back-to-app-btn:active {
+            transform: translateY(0);
+        }
+
         .required::after {
             content: " *";
             color: #ff3366;
@@ -564,6 +609,11 @@
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-paper-plane"></i> Submit Payment
                 </button>
+                
+                <!-- NEW: Back to App Button -->
+                <button type="button" class="back-to-app-btn" id="backToAppBtn">
+                    <i class="fas fa-arrow-left"></i> Back To App
+                </button>
             </form>
         </div>
     </div>
@@ -591,6 +641,12 @@
         const urlParams = new URLSearchParams(window.location.search);
         const productParam = urlParams.get('product');
         const priceParam = urlParams.get('price');
+
+        // NEW: Back to App Button Functionality
+        document.getElementById('backToAppBtn').addEventListener('click', function() {
+            // Redirect to your main website
+            window.location.href = 'https://cyber-toolkit-website.vercel.app/'; // Replace with your actual website URL
+        });
 
         // Load products from Firebase
         function loadProducts() {
